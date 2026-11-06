@@ -680,6 +680,12 @@ table.spec td{text-align:left;font-weight:800;white-space:normal}
 .btn:disabled{opacity:.6;cursor:default}
 .hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
 @media(min-width:760px){.foot-in{grid-template-columns:1.3fr 1fr 1fr 1fr}}
+/* явна висота фото котла: відсоткова висота в grid-контейнері на телефоні не спрацьовує */
+.hero-vis{--vh:clamp(300px,84vw,640px);height:var(--vh)}
+.hero-vis img{height:calc(var(--vh) * .94);max-width:none}
+.mhero-vis{--vh:clamp(290px,78vw,560px);height:var(--vh)}
+.mhero-vis img{height:calc(var(--vh) * .94);max-width:none}
+@media(min-width:960px){.hero-vis{--vh:640px}.mhero-vis{--vh:600px}}
 
 </style>
 </head>
