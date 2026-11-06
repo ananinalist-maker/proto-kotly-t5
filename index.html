@@ -1606,7 +1606,7 @@ if(V&&vfr){
  const vid=$('#vcut'),cap=$('#vcap'),capT=$('#vcapT'),bar=$('#vprog'),vpl=$('#vplay'),vch=$('#vch');
  vfr.classList.toggle('v916',mob);vid.muted=true;
  const mm=x=>Math.floor(x/60)+':'+String(Math.floor(x%60)).padStart(2,'0');
- const ve=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const ve=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])).replace(/(Т5-\d+П?)/g,'<span class="nw">$1</span>');
  vch.innerHTML=cfg.cues.map((q,i)=>'<li><button type="button" data-i="'+i+'"><b>'+mm(q[0])+'</b>'+ve(q[2])+'</button></li>').join('');
  $('#vnote').textContent='Відео заводу «Макситерм» на YouTube, '+(mob?'8 хв, вертикальне':'3 хв')+'.';
  let loaded=false,ci=-2;
@@ -1615,7 +1615,7 @@ if(V&&vfr){
  const tick=()=>{
   const t=vid.currentTime;bar.style.width=Math.min(100,t/cfg.duration*100)+'%';
   let k=-1;cfg.cues.forEach((q,i)=>{if(t>=q[0]&&t<q[1])k=i});
-  if(k!==ci){ci=k;cap.hidden=k<0;if(k>=0){capT.textContent=cfg.cues[k][2];capT.classList.remove('anim');void capT.offsetWidth;capT.classList.add('anim')}
+  if(k!==ci){ci=k;cap.hidden=k<0;if(k>=0){capT.innerHTML=ve(cfg.cues[k][2]);capT.classList.remove('anim');void capT.offsetWidth;capT.classList.add('anim')}
    $$('button',vch).forEach(b=>b.classList.toggle('on',+b.dataset.i===k))}
   if(!vid.paused&&!vid.ended)requestAnimationFrame(tick);
  };
